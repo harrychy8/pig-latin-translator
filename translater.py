@@ -11,7 +11,6 @@
 # As a WMCI Computer Science student, I state on my honour that I will:
 # - cite any help that I have received (from other students, forums, etc.) on this assignment
 # - not share actual program code with others. I realize that I am ENCOURAGED to discuss my approaches to solving problems, but that I should not share actual code.
-# - be ready to explain any parts of the code I submit. I know that if I don’t understand what something does, it doesn’t belong in my assignment.
 #-------------------------------------------------------------------------------
 
 def translate(word):
@@ -35,17 +34,25 @@ def translate(word):
 
                 firstpart += word[x:len(word)]
                 translatedword = firstpart + secondpart +thirdpart
-
-
-
-
-
-
-
-
-
-
-
     return translatedword
 
-print(translate("apple"))
+
+def flipWord(word):
+    vowels = "aeiouy"
+    word = word.lower()
+    prefix = ""
+    suffix = ""
+    prefixDone = False
+    for c in word:
+        if not prefixDone and c in vowels:
+            prefixDone = True
+            suffix += c
+        elif prefixDone:
+            suffix += c
+        else:
+            prefix += c
+    return suffix + prefix
+
+
+
+print(flipWord("jack"))
