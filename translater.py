@@ -25,8 +25,7 @@ def translateword(word):
         if not prefixDone and character in vowels:
             prefixDone = True
             suffix += character
-        elif prefixDone:
-            suffix += character
+        elif prefixDone:            suffix += character
         else:
             prefix += character
     if word[0] in vowels:
@@ -47,4 +46,28 @@ def fixword(word):
         return newword
 
 
-print(fixword("apple"))
+
+#get all the words in one sentence
+def split_sentence(sentence):
+    words = sentence.split() #split by space
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    alphabet += alphabet.upper() #now alphabet is "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+    #get rid off all non-alphabet characters in words
+    newWords = []
+    for word in words:
+        newWord = ""
+        for c in word:
+            if c in alphabet:
+                newWord += c
+        newWords.append(newWord)
+    print(newWords)
+    return newWords
+
+
+wordList = split_sentence("this Is an example seNtenCe, wEll i mEAn... hahahh!")
+sentence = ""
+for word in wordList:
+    sentence += translateword(word) + " "
+
+print(sentence)
