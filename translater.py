@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
-# Name:        translater
-# Purpose:
+# Name:        translator
+# Purpose:      comp sci 20 assiment
 #
 # Author:      0802384 Harry
 #
@@ -13,46 +13,38 @@
 # - not share actual program code with others. I realize that I am ENCOURAGED to discuss my approaches to solving problems, but that I should not share actual code.
 #-------------------------------------------------------------------------------
 
-def translate(word):
-    vowels = ("aeiouyAEIOUY")
-    translatedword = ""
-    firstpart = ""
-    secondpart = ""
-    thirdpart = "ay"
-    fourthpart = "yay"
-    x = 0
-    for character in word:
-        if character not in vowels:
-            secondpart += character
-            x = x+1
-
-        if character in vowels:
-            if word[0] in vowels:
-                firstpart += word[:len(word)]
-                translatedword = firstpart + secondpart + fourthpart
-            else:
-
-                firstpart += word[x:len(word)]
-                translatedword = firstpart + secondpart +thirdpart
-    return translatedword
-
-
-def flipWord(word):
-    vowels = "aeiouy"
+# translator first step --- translate the word
+def translateword(word):
+    vowels = "aeiouyAEIOUY"
     word = word.lower()
     prefix = ""
     suffix = ""
+    newword = ""
     prefixDone = False
-    for c in word:
-        if not prefixDone and c in vowels:
+    for character in word:
+        if not prefixDone and character in vowels:
             prefixDone = True
-            suffix += c
+            suffix += character
         elif prefixDone:
-            suffix += c
+            suffix += character
         else:
-            prefix += c
-    return suffix + prefix
+            prefix += character
+    if word[0] in vowels:
+        newword = suffix+prefix+"yay"
+    else:
+        newword = suffix+prefix+"ay"
+
+    return newword
+
+def fixword(word):
+    capitalLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    if word[0] in capitalLetter:
+        newword = translateword(word)
+        newword = newword.title()
+        return newword
+    else:
+        newword = translateword(word)
+        return newword
 
 
-
-print(flipWord("jack"))
+print(fixword("apple"))
