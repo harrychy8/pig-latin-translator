@@ -20,7 +20,19 @@ def translateword(word):
     prefix = ""
     suffix = ""
     newword = ""
+
+    #check the puctuation (only include . , ! ? here)
+    punctuation = ",.!?"
+    newpunctuation = ""
+    if word[len(word)-1] in punctuation:
+        newpunctuation = word[len(word)-1]
+        word = word[0:len(word)-1]
+    else:
+        pass
+
     prefixDone = False
+
+    #check and translate the word
     for character in word:
         if not prefixDone and character in vowels:
             prefixDone = True
@@ -28,29 +40,34 @@ def translateword(word):
         elif prefixDone:            suffix += character
         else:
             prefix += character
+
+    # check first letter
     if word[0] in vowels:
-        newword = suffix+prefix+"yay"
+        newword = suffix+prefix+"yay"+newpunctuation
     else:
-        newword = suffix+prefix+"ay"
+        newword = suffix+prefix+"ay"+newpunctuation
 
     return newword
 
+
+# fix those upper cased letter
 def fixword(word):
     capitalLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
     if word[0] in capitalLetter:
         newword = translateword(word)
         newword = newword.title()
-        return newword
     else:
         newword = translateword(word)
-        return newword
 
+    return newword
 
+print(fixword("happy!"))
 
 #get all the words in one sentence
 def split_sentence(sentence):
     words = sentence.split() #split by space
-    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    alphabet = "abcdefghijklmnopqrstuvwxyz,.!?"
     alphabet += alphabet.upper() #now alphabet is "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     #get rid off all non-alphabet characters in words
@@ -65,9 +82,9 @@ def split_sentence(sentence):
     return newWords
 
 
-wordList = split_sentence("this Is an example seNtenCe, wEll i mEAn... hahahh!")
+wordList = split_sentence("this Is an example seNtenCe, wEll I mEAn. Hahahh!")
 sentence = ""
 for word in wordList:
-    sentence += translateword(word) + " "
+    sentence += fixword(word) + " "
 
 print(sentence)
