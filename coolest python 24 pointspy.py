@@ -11,48 +11,68 @@
 # As a WMCI Computer Science student, I state on my honour that I will:
 # - cite any help that I have received (from other students, forums, etc.) on this assignment
 # - not share actual program code with others. I realize that I am ENCOURAGED to discuss my approaches to solving problems, but that I should not share actual code.
-# - be ready to explain any parts of the code I submit. I know that if I donâ€™t understand what something does, it doesnâ€™t belong in my assignment.
 #-------------------------------------------------------------------------------
 import random
 
-def drawcards(cardnumber):
+def drawcards(cardid):
 
-    top = " ____________"
-    side = "|            |"
-    if cardnumber >=10:
-        numbers = "|     "+str(cardnumber)+  "     |"
-    else:
-        numbers = "|     "+str(cardnumber)+  "      |"
-    middle = ["|    ACE     |","|    TWO     |","|   THREE    |","|    FOUR    |","|    FIVE    |","|    SIX     |","|   SEVEN    |","|    EIGHT   |","|    NINE    |","|     TEN    |","|    JACK    |","|   QUEEN    |","|    KING    |"]
-    bot = "|____________|"
+    top  =    " ____________ "
+    side =    "|            |"
 
-    print(top)
-    print(side)
-    print(side)
-    print(numbers)
-    print(side)
-    print(middle[cardnumber-1])
-    print(side)
-    print(numbers)
-    print(side)
-    print(side)
-    print(bot)
+    middle = ["|    ACE     |", #0 cardid
+              "|    TWO     |", #1
+              "|   THREE    |", #2
+              "|    FOUR    |", #3
+              "|    FIVE    |", #4
+              "|    SIX     |", #5
+              "|   SEVEN    |", #6
+              "|    EIGHT   |", #7
+              "|    NINE    |", #8
+              "|     TEN    |", #9
+              "|    JACK    |", #10
+              "|   QUEEN    |", #11
+              "|    KING    |"] #12
+
+    bot =     "|____________|"
+
+
+    str = ""
+    #your problem is here.....
+    for i in range(10): #loop 10 times
+        if i == 0: # if it's the top one
+            for i in range(4):
+                str += top + " "
+            str += "\n" #\n = newline char or [enter]
+        if i == 4: # if it's the middle one
+            for i in range(4):
+                str += middle[cardid[i]] + " "
+            str += "\n"
+        if i == 9: # if it's the bottom one
+            for i in range(4):
+                str += bot + " "
+            str += "\n"
+        else : # if it's everything else
+            for i in range(4):
+                str += side + " "
+            str += "\n"
+
+    print(str) #print the card
+
 
 
 def drawgroupofcards(firstnumber,secondnumber,thirdnumber,fourthnumber):
-    newstring =""
+    newstring ="" #what is this???
 
-    newstring += str(drawcards(firstnumber))+"                "+str(drawcards(secondnumber))+"                 "+str(drawcards(thirdnumber))+"                  "+str(drawcards(fourthnumber))
-
+    drawcards([firstnumber,secondnumber,thirdnumber,fourthnumber]) #we put id into an array, it's easier to loop through
 
 
 
 
 def restartgame():
-    firstnumber = random.randint(1,13)
-    secondnumber = random.randint(1,13)
-    thirdnumber = random.randint(1,13)
-    fourthnumber = random.randint(1,13)
+    firstnumber = random.randint(1,12)
+    secondnumber = random.randint(1,12)
+    thirdnumber = random.randint(1,12)
+    fourthnumber = random.randint(1,12)
     drawgroupofcards(firstnumber,secondnumber,thirdnumber,fourthnumber)
 
 restartgame()
